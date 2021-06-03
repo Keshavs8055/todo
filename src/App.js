@@ -1,21 +1,21 @@
-import React from 'react';
-import Header from './pages/components/header';
+import React from "react";
+import Header from "./pages/components/header";
 import {
   ThemeProvider,
   unstable_createMuiStrictModeTheme as createMuiTheme,
   Typography,
-} from '@material-ui/core';
+} from "@material-ui/core";
 
-import { connect } from 'react-redux';
-import { setUser } from './redux/user/user.action';
-import { auth, createUserDoc } from './firebase/firebase.utils';
+import { connect } from "react-redux";
+import { setUser } from "./redux/user/user.action";
+import { auth, createUserDoc } from "./firebase/firebase.utils";
 
-import Homepage from './pages/homepage';
-import { red } from '@material-ui/core/colors';
+import Homepage from "./pages/homepage";
+import { red } from "@material-ui/core/colors";
 
 const theme = createMuiTheme({
   palette: {
-    type: 'dark',
+    type: "dark",
     secondary: red,
   },
 });
@@ -23,8 +23,6 @@ const theme = createMuiTheme({
 class App extends React.Component {
   constructor(props) {
     super();
-    console.log(props);
-    console.log('in App');
     this.state = {
       loading: true,
     };

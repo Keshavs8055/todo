@@ -1,27 +1,27 @@
-import firebase from 'firebase/app';
-import 'firebase/firestore';
-import 'firebase/auth';
+import firebase from "firebase/app";
+import "firebase/firestore";
+import "firebase/auth";
 
 const {
   REACT_APP_APIKEY,
-  REACT_APP_AUTH_DOMAIN,
-  REACT_APP_DATABASE_URL,
-  REACT_APP_PROJECT_ID,
-  REACT_APP_STORAGE_BUCKET,
-  REACT_APP_SENDER_ID,
-  REACT_APP_APP_ID,
-  REACT_APP_M_ID,
+  REACT_APP_AUTHDOMAIN,
+  REACT_APP_DATABASEURL,
+  REACT_APP_PROJECTID,
+  REACT_APP_STORAGEBUCKET,
+  REACT_APP_MESSAGINGSENDERID,
+  REACT_APP_APPID,
+  REACT_APP_MEASUREMENTID,
 } = process.env;
 
 const firebaseConfig = {
   apiKey: REACT_APP_APIKEY,
-  authDomain: REACT_APP_AUTH_DOMAIN,
-  databaseURL: REACT_APP_DATABASE_URL,
-  projectId: REACT_APP_PROJECT_ID,
-  storageBucket: REACT_APP_STORAGE_BUCKET,
-  messagingSenderId: REACT_APP_SENDER_ID,
-  appId: REACT_APP_APP_ID,
-  measurementId: REACT_APP_M_ID,
+  authDomain: REACT_APP_AUTHDOMAIN,
+  databaseURL: REACT_APP_DATABASEURL,
+  projectId: REACT_APP_PROJECTID,
+  storageBucket: REACT_APP_STORAGEBUCKET,
+  messagingSenderId: REACT_APP_MESSAGINGSENDERID,
+  appId: REACT_APP_APPID,
+  measurementId: REACT_APP_MEASUREMENTID,
 };
 export const createUserDoc = async (userAuth, data) => {
   if (!userAuth) {
@@ -41,7 +41,7 @@ export const createUserDoc = async (userAuth, data) => {
         createdAt,
       });
     } catch (err) {
-      alert('Error:' + err.message);
+      alert("Error:" + err.message);
     }
   }
   return userRef;
@@ -53,16 +53,16 @@ export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
 const provider = new firebase.auth.GoogleAuthProvider();
-provider.setCustomParameters({ prompt: 'select_account' });
+provider.setCustomParameters({ prompt: "select_account" });
 
 export const signInWithGoogle = () =>
   auth.signInWithPopup(provider).catch((err) => alert(err.message));
 
 export const getTasks = async (id) => {
   let data = await firestore
-    .collection('users')
+    .collection("users")
     .doc(id)
-    .collection('tasks')
+    .collection("tasks")
     .get()
     .catch((err) => alert(err.message));
   let docs = [];

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   IconButton,
   ListItem,
@@ -9,19 +9,19 @@ import {
   makeStyles,
   withStyles,
   CircularProgress,
-} from '@material-ui/core';
-import { Delete } from '@material-ui/icons';
-import { firestore } from '../../../firebase/firebase.utils';
-import { getTasks } from '../../../firebase/firebase.utils';
-import { connect } from 'react-redux';
+} from "@material-ui/core";
+import { Delete } from "@material-ui/icons";
+import { firestore } from "../../../firebase/firebase.utils";
+import { getTasks } from "../../../firebase/firebase.utils";
+import { connect } from "react-redux";
 
 const styles = makeStyles((theme) => ({
   itemText: {
-    textTransform: 'capitalize',
-    background: 'red',
+    textTransform: "capitalize",
+    background: "red",
   },
   checked: {
-    textDecoration: 'underline',
+    textDecoration: "underline",
   },
 }));
 
@@ -40,9 +40,9 @@ class Task extends React.Component {
       (s) => ({ checked: !s.checked }),
       () => {
         firestore
-          .collection('users')
+          .collection("users")
           .doc(this.props.user.id)
-          .collection('tasks')
+          .collection("tasks")
           .doc(this.props.taskId)
           .update({
             completed: this.state.checked,
@@ -59,9 +59,9 @@ class Task extends React.Component {
   handleDelete = () => {
     this.setState({ d_updating: true });
     firestore
-      .collection('users')
+      .collection("users")
       .doc(this.props.user.id)
-      .collection('tasks')
+      .collection("tasks")
       .doc(this.props.taskId)
       .delete()
       .then(async () => {
@@ -76,7 +76,11 @@ class Task extends React.Component {
         <ListItem divider>
           <ListItemIcon>
             {this.state.t_updating ? (
-              <CircularProgress size={20} color="secondary" />
+              <CircularProgress
+                variant="determinate"
+                size={20}
+                color="secondary"
+              />
             ) : (
               <Checkbox
                 onChange={this.handleChange}
@@ -91,13 +95,17 @@ class Task extends React.Component {
             primary={`${this.props.title}`}
             secondary={
               this.props.date
-                ? `Due on ${this.props.date.replace('T', ' at ')}`
+                ? `Due on ${this.props.date.replace("T", " at ")}`
                 : null
             }
           />
           <ListItemSecondaryAction>
             {this.state.d_updating ? (
-              <CircularProgress size={20} color="secondary" />
+              <CircularProgress
+                variant="determinate"
+                size={20}
+                color="secondary"
+              />
             ) : (
               <IconButton
                 onClick={this.handleDelete}
@@ -119,6 +127,6 @@ const mstp = (s) => ({
   tasks: s.tasks.tasks,
 });
 const mdtp = (dispatch) => ({
-  updateTasks: (data) => dispatch({ type: 'UPDATE_TASKS', payload: data }),
+  updateTasks: (data) => dispatch({ type: "UPDATE_TASKS", payload: data }),
 });
 export default connect(mstp, mdtp)(withStyles(styles)(Task));
