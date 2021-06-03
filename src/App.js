@@ -3,7 +3,6 @@ import Header from "./pages/components/header";
 import {
   ThemeProvider,
   unstable_createMuiStrictModeTheme as createMuiTheme,
-  Typography,
   CircularProgress,
   Box,
 } from "@material-ui/core";
