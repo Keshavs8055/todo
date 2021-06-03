@@ -4,6 +4,8 @@ import {
   ThemeProvider,
   unstable_createMuiStrictModeTheme as createMuiTheme,
   Typography,
+  CircularProgress,
+  Box,
 } from "@material-ui/core";
 
 import { connect } from "react-redux";
@@ -57,9 +59,18 @@ class App extends React.Component {
           <Header />
           <Homepage />
           {this.state.loading ? (
-            <Typography variant="h6" align="center">
-              LOADING...
-            </Typography>
+            <Box
+              display="flex"
+              alignContent="center"
+              justifyContent="center"
+              margin={2}
+            >
+              <CircularProgress
+                variant="indeterminate"
+                size={20}
+                color="secondary"
+              />
+            </Box>
           ) : null}
         </div>
       </ThemeProvider>

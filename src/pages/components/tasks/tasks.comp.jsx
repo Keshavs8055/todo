@@ -86,7 +86,7 @@ class Tasks extends React.Component {
         ) : (
           <CircularProgress
             color="secondary"
-            variant="determinate"
+            variant="indeterminate"
             size={20}
             style={{
               position: "absolute",

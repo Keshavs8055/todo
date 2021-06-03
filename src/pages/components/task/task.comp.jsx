@@ -77,7 +77,7 @@ class Task extends React.Component {
           <ListItemIcon>
             {this.state.t_updating ? (
               <CircularProgress
-                variant="determinate"
+                variant="indeterminate"
                 size={20}
                 color="secondary"
               />
@@ -102,7 +102,7 @@ class Task extends React.Component {
           <ListItemSecondaryAction>
             {this.state.d_updating ? (
               <CircularProgress
-                variant="determinate"
+                variant="indeterminate"
                 size={20}
                 color="secondary"
               />
