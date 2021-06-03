@@ -1,15 +1,15 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 import {
   Typography,
   withStyles,
   makeStyles,
   List,
   CircularProgress,
-} from '@material-ui/core';
+} from "@material-ui/core";
 
-import Task from '../task/task.comp';
-import { getTasks } from '../../../firebase/firebase.utils';
+import Task from "../task/task.comp";
+import { getTasks } from "../../../firebase/firebase.utils";
 
 const styles = makeStyles((theme) => ({
   title: {
@@ -53,7 +53,7 @@ class Tasks extends React.Component {
           {this.props.user.displayName.replace(
             /\b[a-z]|['_][a-z]|\B[A-Z]/g,
             function (x) {
-              return x[0] === "'" || x[0] === '_'
+              return x[0] === "'" || x[0] === "_"
                 ? x
                 : String.fromCharCode(x.charCodeAt(0) ^ 32);
             }
@@ -86,13 +86,13 @@ class Tasks extends React.Component {
         ) : (
           <CircularProgress
             color="secondary"
-            variant="static"
+            variant="determinate"
             size={20}
             style={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-60%, -50%)',
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-60%, -50%)",
             }}
           />
         )}
@@ -105,6 +105,6 @@ const mstp = (state) => ({
   tasks: state.tasks.tasks,
 });
 const mdtp = (dispatch) => ({
-  updateTasks: (data) => dispatch({ type: 'UPDATE_TASKS', payload: data }),
+  updateTasks: (data) => dispatch({ type: "UPDATE_TASKS", payload: data }),
 });
 export default connect(mstp, mdtp)(withStyles(styles)(Tasks));

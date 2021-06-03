@@ -12,7 +12,6 @@ const {
   REACT_APP_APPID,
   REACT_APP_MEASUREMENTID,
 } = process.env;
-
 const firebaseConfig = {
   apiKey: REACT_APP_APIKEY,
   authDomain: REACT_APP_AUTHDOMAIN,
@@ -41,6 +40,7 @@ export const createUserDoc = async (userAuth, data) => {
         createdAt,
       });
     } catch (err) {
+      console.log(err);
       alert("Error:" + err.message);
     }
   }
@@ -56,7 +56,10 @@ const provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({ prompt: "select_account" });
 
 export const signInWithGoogle = () =>
-  auth.signInWithPopup(provider).catch((err) => alert(err.message));
+  auth.signInWithPopup(provider).catch((err) => {
+    console.log(err);
+    alert(err.message);
+  });
 
 export const getTasks = async (id) => {
   let data = await firestore
@@ -64,7 +67,10 @@ export const getTasks = async (id) => {
     .doc(id)
     .collection("tasks")
     .get()
-    .catch((err) => alert(err.message));
+    .catch((err) => {
+      console.log(err);
+      alert(err.message);
+    });
   let docs = [];
   data.forEach((doc) => {
     docs.push({ id: doc.id, ...doc.data() });
